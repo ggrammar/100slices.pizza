@@ -4,6 +4,9 @@
 
 CONTAINER_NAME='100slices'
 
+echo "Preparing the container with Ansible prerequisites."
+docker build --tag ${CONTAINER_NAME} .
+
 # Make sure we clean up any old Docker containers. 
 RUNNING_CONTAINERS=`docker ps \
 	--all \
@@ -21,6 +24,7 @@ else
 	echo "No existing ${CONTAINER_NAME} containers found."
 fi
 
+
 # Launch the local Docker container that will run the website. 
 #	8080:80 to get the webserver available locally. 
 #	2222:22 to 
@@ -31,7 +35,7 @@ CONTAINER_ID=`docker run \
 	--publish 2222:22 \
 	--tty \
 	--detach \
-	ubuntu`
+	${CONTAINER_NAME}`
 
 if [[ $? -ne 0 ]]; then
 	echo "Some sort of error launching the container."
@@ -39,35 +43,6 @@ if [[ $? -ne 0 ]]; then
 else
 	echo "Launched ${CONTAINER_NAME} container with ID ${CONTAINER_ID}."
 fi
-
-# TODO: This should really be a Dockerfile, for obvious reasons. 
-# TODO: Use someone other than root. 
-# Get to the point where we can use Ansible. Install sshd and add our ssh 
-# keys to allow root access.
-echo "Preparing the container with Ansible prerequisites."
-docker exec \
-	${CONTAINER_ID} \
-	"/usr/bin/apt-get" "update" 
-
-docker exec \
-	${CONTAINER_ID} \
-	"/usr/bin/apt-get" "install" "-y" "openssh-server" "python3"
-
-docker exec \
-	${CONTAINER_ID} \
-	"/usr/sbin/service" "ssh" "start"
-
-docker exec \
-	${CONTAINER_ID} \
-	"mkdir" "/root/.ssh/"
-
-docker cp \
-	"/home/gmgordon/.ssh/id_rsa.pub" \
-	"${CONTAINER_NAME}:/root/.ssh/authorized_keys"
-
-docker exec \
-	${CONTAINER_ID} \
-	"chown" "root:root" "/root/.ssh/authorized_keys"
 
 # This is probably a brand new container, so
 # TODO: Is there a more graceful way to handle this? This requires saying 'yes'
