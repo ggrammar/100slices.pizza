@@ -11,3 +11,7 @@
             name: apache2
             state: started
             enabled: yes
+  - name: Install web site.
+    copy:
+            src: index.html
+            dest: /var/www/html/index.html
