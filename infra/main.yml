@@ -15,3 +15,7 @@
     copy:
             src: index.html
             dest: /var/www/html/index.html
+  - name: Install about me page.
+    copy:
+            src: about_me.html
+            dest: /var/www/html/about_me.html
