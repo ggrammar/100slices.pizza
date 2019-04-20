@@ -9,13 +9,6 @@
             enabled: yes
   - name: Install web site.
     copy:
-            src: index.html
-            dest: /var/www/html/index.html
-  - name: Install about me page.
-    copy:
-            src: about_me.html
-            dest: /var/www/html/about_me.html
-  - name: Install lorem ipsum page.
-    copy:
-            src: lorem_ipsum.html
-            dest: /var/www/html/lorem_ipsum.html
+            src: site/
+            dest: /var/www/html/
+ 
