@@ -2,10 +2,6 @@
   remote_user: root
   sudo: yes
   tasks:
-  - name: Install Apache. 
-    apt:
-            name: apache2
-            update_cache: yes
   - name: Launch Apache.
     service:
             name: apache2
