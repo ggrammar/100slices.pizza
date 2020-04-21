@@ -8,4 +8,4 @@ The reason I'm doing this on the public Internet (rather than in a private noteb
 
 Here are some posts that you might care to read:
  - [Tents and Trees](./posts/tents_and_trees.html "Tents and Trees")
- - [About Me](./posts/about_me.html "About Me")
+ - [About Me](./posts/about_me.md "About Me")
