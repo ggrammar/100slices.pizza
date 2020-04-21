@@ -7,10 +7,10 @@ The innards are hand-soldered and mostly intact, and there's probably fewer than
 
 ## [6 April 2020 - 21 April 2020]
 Who knows how circuits work? Not me! I watched some videos to get my head on straight:
- - Pluralsight has [a decent introduction] (https://www.pluralsight.com/courses/electronics-fundamentals) to the fundamentals. 
+ - Pluralsight has [a decent introduction](https://www.pluralsight.com/courses/electronics-fundamentals) to the fundamentals. 
  - Jeremy Blum has an excellent introduction to Eagle, a computer-aided design tool introduced in the Pluralsight course:
-   - https://www.youtube.com/watch?v=1AXwjZoyNno
-   - https://www.youtube.com/watch?v=CCTs0mNXY24
+   - [Schematic Design](https://www.youtube.com/watch?v=1AXwjZoyNno)
+   - [Printed Circuit Board Layout](https://www.youtube.com/watch?v=CCTs0mNXY24)
  - Khan Academy has [a much more thorough introduction](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic) to electrical engineering concepts. 
 
 I took apart the pedal, and got a sense of how everything was connected. I spent a day trying to draw a good circuit
@@ -20,3 +20,7 @@ got things sketched out on paper. Take a look [here](https://imgur.com/gallery/s
 At the moment, I'm working through the Khan Academy videos to better understand how to work out the total resistance
 in the circuit. I'll need to do that, and identify a couple of mystery components (which look like resistors, but that
 doesn't make electrical sense) before I'm able to figure out the whole circuit. 
+
+Then, I'll be able to:
+ - Put the whole thing into Eagle. 
+ - Figure out why the pedal makes the noises it does.
