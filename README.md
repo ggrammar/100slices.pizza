@@ -1,6 +1,6 @@
 This is the website called 100slices.pizza. 
 
-My name is Grant Gordon - I'm the operator of this website! I'm happy to have you here. 
+My name is Grant Gordon - I'm the operator of this website. I'm happy to have you here!
 
 I use this website to post my thoughts on systems administration, electrical engineering, and pizza.
 
