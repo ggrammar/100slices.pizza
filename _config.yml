@@ -1,2 +1,3 @@
 theme: jekyll-theme-minimal
 title: pizza.slice (loaded active) # this is an excellent systemd joke
+show_downloads: false # it's just blog posts, no runtimes
