@@ -22,5 +22,9 @@ in the circuit. I'll need to do that, and identify a couple of mystery component
 doesn't make electrical sense) before I'm able to figure out the whole circuit. 
 
 Then, I'll be able to:
- - Put the whole thing into Eagle. 
  - Figure out why the pedal makes the noises it does.
+ - Put the whole thing into Eagle. 
+ - Finish the project? I'm not sure what "done" looks like yet - perhaps I will:
+   - Order and solder my own board through Eagle, and see if it sounds the same. 
+   - De-solder and re-solder the whole circuit, to make sure I understand it.
+   - Solder additional components on, to change the noise. 
