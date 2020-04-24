@@ -29,7 +29,7 @@ Then, I'll be able to:
    - De-solder and re-solder the whole circuit, to make sure I understand it.
    - Solder additional components on, to change the noise. 
 
-[23 April 2020]
+## [23 April 2020]
 Aha! Those switches are 2P2T and 3P2T switches.
 It doesn't change much, but at least I can draw them correctly
 in the schematic now. 
