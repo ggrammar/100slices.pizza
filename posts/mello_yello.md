@@ -33,3 +33,10 @@ Then, I'll be able to:
 Aha! Those switches are 2P2T and 3P2T switches.
 It doesn't change much, but at least I can draw them correctly
 in the schematic now. 
+
+## [26 April 2020]
+I bought a digital voltmeter, and learned a few things about the circuit:
+ - The potentiometers max out at 10KΩ and 100KΩ, with about 1% variation. 
+ - The resistors are 100Ω resistors. 
+ - My voltmeter beeps at me when I try to measure resistance on a live circuit, which is great because it would give me terrible readings otherwise. 
+ - The whole circuit clocks in at a little over 9V (9.4V) - I'm using a 1 SPOT to power it (rather than a 9V battery), so short of measuring power at the socket, I'm comfortable attributing the variance to that. 
