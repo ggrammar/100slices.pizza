@@ -40,3 +40,9 @@ I bought a digital voltmeter, and learned a few things about the circuit:
  - The resistors are 100Ω resistors. 
  - My voltmeter beeps at me when I try to measure resistance on a live circuit, which is great because it would give me terrible readings otherwise. 
  - The whole circuit clocks in at a little over 9V (9.4V) - I'm using a 1 SPOT to power it (rather than a 9V battery), so short of measuring power at the socket, I'm comfortable attributing the variance to that. 
+
+## [3 May 2020]
+Next steps for the Mello Yello project:
+ - Set up audio in/audio out for my workshop, so I can hear the pedal in action. 
+ - I think one of the potentiometers doesn't work - remove it from the circuit, and see if things sound the same. 
+ - Re-create the circuit (with 2P2T and 3P2T switches and everything) in Eagle. Then, add it to GitHub - see what it's like to version control a PCB design. 
