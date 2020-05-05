@@ -46,3 +46,32 @@ Next steps for the Mello Yello project:
  - Set up audio in/audio out for my workshop, so I can hear the pedal in action. 
  - I think one of the potentiometers doesn't work - remove it from the circuit, and see if things sound the same. 
  - Re-create the circuit (with 2P2T and 3P2T switches and everything) in Eagle. Then, add it to GitHub - see what it's like to version control a PCB design. 
+ 
+## [5 May 2020]
+I set up audio in the workshop, so I can fiddle with the pedal, and understand what's going on. I'm lucky enough to have the [Make Noise 0-coast](http://www.makenoisemusic.com/synthesizers/ohcoast), which I can use to generate pure tones.
+
+Here are my observations for the day:
+ - The pedal works in "passthru" mode (3PDT switch does not route to circuit board) with or without power. 
+  - This makes sense to me - the passive components will conduct current in to current out, even if there's no power to run the rest of the board. 
+ - In "live" mode (3PDT switch routes current through circuit board), the pedal has to have power.
+ - In "live" mode, audio in/audio out jacks cannot be switched around.
+  - I'm not sure why this is yet. 
+  
+I set up the 0-coast to make a "ping" noise - a sudden start, with a long tail. I had these additional observations:
+ - I can measure the voltage of the "ping" noise, which is pretty cool! 
+  - The noise starts at about 0.500V, depending on how loud the 0-coast makes it. 
+  - The noise decreases smoothly to about 0.027V, which seems to be a constant low measurement on this circuit. 
+  - Voltage seems to correlate to the loudness of the noise produced by the 0-coast (not necessary the loudness of the nosie that makes it to the speaker). 
+  
+ - At the very end of the noise (from ~0.050V to ~0.027V), there is a sudden clarity of the noise, as though the distortion stopped.
+  - Maybe there is a component that doesn't work at these low voltages, or we're routing around a resistor at these low voltages?
+ 
+ - The 100KΩ resistor is basically a volume knob. At full CCW, no sound is produced. 
+ - The 100KΩ resistor does not affect voltage in - it only affects voltage out. 
+ - For the moment, I do not know how to measure the difference between distorted and non-distored output. 
+ 
+I'll have to read up more on how an electrical current is turned in to an audio signal. I still don't understand what the distortion circuit is doing to change the quality of the noise. 
+
+Further, I think getting everything into Eagle and performing a more thorough circuit analysis will help me understand the unusual behavior between ~0.050V and ~0.027V. 
+
+But, "voltage == loudness" seems like a pretty sensible conclusion to have drawn - the more voltage pouring into the speaker, the stronger the vibrations, the louder the noise. Progress!
