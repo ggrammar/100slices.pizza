@@ -7,8 +7,8 @@ I use this website to post my thoughts on systems administration, electrical eng
 The reason I'm doing this on the public Internet (rather than in a private notebook), is that I'd like to solicit feedback from whoever cares enough to read. 
 
 Here are some posts that you might like to read:
- - [Mello Yello](./posts/mello_yello.html "Noise Machine")
- - [I Love Lamp](./posts/i_love_lamp.html "I Love Lamp")
+ - [Mello Yello](./posts/mello_yello.html "Noise Machine") (6 April 2020 - Present)
+ - [I Love Lamp](./posts/i_love_lamp.html "I Love Lamp") (10 May 2020)
  - [About Me](./posts/about_me.html "About Me")
- - [Tents and Trees](./posts/tents_and_trees.html "Tents and Trees")
+ - [Tents and Trees](./posts/tents_and_trees.html "Tents and Trees") (28 April 2019)
 
