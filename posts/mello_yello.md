@@ -75,3 +75,31 @@ I'll have to read up more on how an electrical current is turned in to an audio 
 Further, I think getting everything into Eagle and performing a more thorough circuit analysis will help me understand the unusual behavior between ~0.050V and ~0.027V. 
 
 But, "voltage == loudness" seems like a pretty sensible conclusion to have drawn - the more voltage pouring into the speaker, the stronger the vibrations, the louder the noise. Progress!
+
+## [12 May 2020]
+
+I didn't know where to go next, so I took every measurement my volmeter was capable of taking. I learned some things about the circuit, and I learned some things about the voltmeter!
+
+|Measurement            |w/o distortion    |w/ distortion   |
+|---                    |---               |---|
+|Voltage                |.515V -> 0.027V   |.044V -> 0V   |
+|Current                |36mA              |No reading, audio interference   |
+|Resistance             |0Ω                |94.8kΩ   |
+|Frequency/Duty Cycle   |70.75Hz           |141.5Hz   |
+
+What I learned about the voltmeter:
+ - When measuring current, I can bypass the distortion circuit altogether by measuring at the right contacts. 
+  - The current must prefer my voltmeter circuit to the actual circuit. 
+   - Measuring current means adding an additional circuit to the circuit. 
+  - Why doesn't this happen for voltage or frequency? 
+   - Can the voltmeter take point measurements, without adding a circuit? 
+
+What I learned about the distortion circuit:
+ - Part of what the circuit does is double the frequency/duty cycle of incoming audio.
+  - This makes sense, with what I understand about audio waves - the distortion has very little bass, compared to the incoming signal. 
+  - I wonder if I can pass in a very low note (<20Hz), and get audible bass out of the circuit? 
+  
+Open questions:
+ - The measurements I took don't line up with what I understand about Ohm's law. What's up with that?
+ - Beyond modifying the frequency/duty cycle, what else is the distortion circuit doing to incoming signals? 
+ - How does the voltmeter take measurements for voltage, freq/duty cycle?
