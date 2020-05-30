@@ -103,3 +103,22 @@ Open questions:
  - The measurements I took don't line up with what I understand about Ohm's law. What's up with that?
  - Beyond modifying the frequency/duty cycle, what else is the distortion circuit doing to incoming signals? 
  - How does the voltmeter take measurements for voltage, freq/duty cycle?
+ 
+## [30 May 2020]
+Took some more measurements today. Figured out how to use the alligator clips on the voltmeter (turns out, you need to remove the tips that are on the leads before putting the clips on!), so now I'm able to take measurements as I'm manipulating the current. Very useful!
+
+I did some research on how an octave pedal might work - one that raises the input signal by one octave. Some of them work like this - say a wave goes from +5V to -5V. For the bit that's -5V, reverse it, so you have two peaks at +5V instead of one. This effectively doubles the frequency. Apparently some pedals do this "with diodes", but it's not clear to me what the electrical mechanism is that actually makes this happen. 
+
+I also discovered that the 0-coast uses a triangle wave (or square wave), instead of a sine wave. This complicates my experiments - these waves produce overtones, so what I'm hearing through the speaker isn't just the fundamental frequency, but sympathetic frequencies as well. I don't have access to a sine wave generator, so I'll have to spend some time to understand how overtones work. 
+
+I also found that the 0-coast has a knob that allows you to filter between the base frequency, and the overtones - you can get all of one, or all of the other, or a mix of both. You can also amplify certain overtones! The voltmeter registers the frequency of whichever overtone is the loudest - so with a base frequency of 100Hz, you can see 100Hz, 300Hz, 500Hz, etc. If you're very careful, you can get a 200Hz reading by straddling the base frequency and the first overtone, and the voltmeter averages the two out. There's no overtone at one octave above the base frequency (I don't think?), so this is just a neat measurement artifact. 
+
+This is getting in to audio engineering, in addition to electrical engineering. But, that's the gear that I have, so I'll just have to sit at that intersection. 
+
+Anyway - Mello Yello doesn't just raise the input signal an octave, it also distorts it. This might be a function of the aforementioned octave pedal function - maybe having no negative signal distorts the sound as well. 
+
+Open questions:
+ - What is it about a triangle wave that makes it produce overtones? What is it about a square wave? 
+ - Why doesn't a sine wave produce overtones?
+ - How does the 0-coast separate out the base frequency from the overtones?
+ - How can I determine whether Mello Yello is doubling the frequency of the input signal, or if it's doing something differently/something additional?
