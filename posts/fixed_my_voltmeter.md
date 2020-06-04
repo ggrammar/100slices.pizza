@@ -1,7 +1,7 @@
-## I Fixed My Voltmeter!
-### Well, I fixed one of the alligator-clip leads. 
-#### I'm also responsible for breaking it.
-##### I didn't read the instructions very well. 
+# I Fixed My Voltmeter!
+## Well, I fixed one of the alligator-clip leads. 
+### I'm also responsible for breaking it.
+#### I didn't read the instructions very well. 
 
 My voltmeter came with a couple of attachable alligator clips. I've been using them to clip on to quarter-inch cable sockets, to get hands-free voltage and frequency readings while I fiddle with other things or take notes. 
 
