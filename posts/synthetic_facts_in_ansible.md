@@ -77,8 +77,9 @@ already gathered from the host. I put all of the logic into a role called `synth
 
 - name: Populate the list with private IP addresses. 
   set_fact:
-    private_addresses: {{ private_addresses + [ ] }}
+    private_addresses: ⦃⦃ private_addresses + [ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] ] ⦄⦄
   when: 
+    - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] is defined
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private')
   with_items: hostvars[inventory_hostname]['ansible_interfaces']
 ```
