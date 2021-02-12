@@ -60,15 +60,15 @@ that's going to make the templates way bigger than they need to be.
 That solves this specific issue, but the solution I came up with - synthetic facts - has 
 merit beyond this specific problem. 
 
-I found a couple of options for moving this complexity out of the templates, to somewhere
-more centralized. Ideally, I would have liked to extend the ansible `setup` module, so that
-it would create these facts for me, but I didn't see a way to do that intuitively. 
+Ideally, I would have liked to extend the ansible `setup` module, so that it would create 
+these facts for me, but I didn't see a low-maintenance way to do that. Instead, I found a
+way to create new facts, at runtime, based on the information that `setup` already gathers. 
 
 ## Synthetic Facts
 
-Instead, we can create these additional facts at runtime. If we only use `set_fact`, this runs very
-quickly (single-digit seconds), since it's just operating on information we've already gathered 
-from the host. I put all of the logic into a role called `synthetic-facts`:
+Here's how I create additional information on top of the `setup` facts. If we only use `set_fact`, 
+this runs very quickly (single-digit seconds), since it's just operating on information we've 
+already gathered from the host. I put all of the logic into a role called `synthetic-facts`:
 ```
 # roles/synthetic-facts/tasks/main.yml
 - name: Create a list to hold our private IP addresses. 
@@ -98,4 +98,4 @@ runtime - it's all local, so it's very fast - but it makes our site file a littl
     - graph-database
 ```
 
-
+TODO: Conclusion
