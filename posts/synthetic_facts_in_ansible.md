@@ -97,11 +97,11 @@ can imagine other synthetic facts that might be useful - a list variable `privat
 for hosts connected to multiple private networks, or a `public_network_address` variable.
 
 Here are some other ideas for synthetic facts you might derive from `setup`:
- - `{{ network_interfaces_on_small_subnets }}`
- - `{{ network_interfaces_without_ipv6_addresses }}`
- - `{{ disks_over_500GB }}`
- - `{{ disks_without_partitions }}`
- - `{{ undefined_environment_variables }}`
+ - `⦃⦃ network_interfaces_on_small_subnets ⦄⦄`
+ - `⦃⦃ network_interfaces_without_ipv6_addresses ⦄⦄`
+ - `⦃⦃ disks_over_500GB ⦄⦄`
+ - `⦃⦃ disks_without_partitions ⦄⦄`
+ - `⦃⦃ undefined_environment_variables ⦄⦄`
 
 The one drawback to this pattern is that it makes our site.yml a little clumsy. We have to 
 add this role to every host/role mapping:
