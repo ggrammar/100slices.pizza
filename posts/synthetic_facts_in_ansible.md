@@ -1,4 +1,4 @@
-## Synthetic Facts with Ansible
+## Synthetic Facts in Ansible
 
 > Heads up! The code examples in this article use fancy curly brackets `⦃` and `⦄`, instead 
 of curly brackets that would actually compile, `{` and `}`. If I use the normal curly brackets,
