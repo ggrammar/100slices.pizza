@@ -27,11 +27,14 @@ server.endpoint = tcp://⦃⦃ hostvars[inventory_hostname]['ansible_eth0']['ipv
 ...and Ansible will replace that bracketed block with the IP address of the server it's running on.
 
 This is fine if you know that every server you'll ever touch has an eth0 interface, and that eth0
-interface will always have a private IP address. Things aren't usually that simple - what I'd really
-like is to have a variable like `private_network_address` and use that instead. 
+interface will always have a private IP address. Things aren't usually that simple - maybe my server
+has a bonded pair of NICs on bond0 with the private IP address, or maybe eth0 is the public interface
+for just one server. 
+
+What I'd really like is to have a variable like `private_network_address` and use that instead. 
 
 Ansible gathers all of the information we need to synthesize this variable, it's just a matter of 
-putting it together:
+putting it together. Here's what it looks like in the template:
 
 ```
 # arangod.conf.template
@@ -54,34 +57,54 @@ server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 
 What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
 the private IP address for the server<sup>1</sup>. Plus, I have to do this separately in every template - 
-that's going to make the templates way bigger than they need to be. 
+that's going to make the templates way bigger and more complicated than they need to be. 
 
 Ideally, I would have liked to extend the ansible `setup` module, so that it would create 
 these facts for me, but I didn't see a low-maintenance way to do that. Instead, I found a
 way to create new facts, at runtime, based on the information that `setup` already gathers. 
+I'm calling these "synthetic sacts". 
 
 ## Synthetic Facts
 
-Here's how I create additional information on top of the `setup` facts. If we only use `set_fact`, 
-this runs very quickly (single-digit seconds), since it's just operating on information we've 
-already gathered from the host. I put all of the logic into a role called `synthetic-facts`:
+Here's how I create these synthetic facts. I put all of the logic to create these facts in a new 
+role, `synthetic-facts`<sup>2</sup>. Because the only module that this role calls is `set_fact`, it runs very quickly - 
+all of the logic is executed on the controller, using information that `setup` has already gathered
+from the host. Here's how the role looks:
 ```
 # roles/synthetic-facts/tasks/main.yml
-- name: Create a list to hold our private IP addresses. 
-  set_fact:
-    private_addresses: []
 
-- name: Populate the list with private IP addresses. 
+- name: Create the "private_address" fact. 
   set_fact:
-    private_addresses: ⦃⦃ private_addresses + [ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] ] ⦄⦄
+    private_address: "⦃⦃ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] ⦄⦄"
   when: 
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] is defined
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private')
   with_items: hostvars[inventory_hostname]['ansible_interfaces']
 ```
 
-We do have to assign this role to every group of hosts. This doesn't really hurt our 
-runtime - it's all local, so it's very fast - but it makes our site file a little clumsy:
+And, here's how we might use it in our configuration:
+```
+# arangod.conf.template
+server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
+```
+
+Much cleaner! By separating the logic of finding what our private IP address is from the
+actual configuration, we have a cleaner config and a very useful variable. 
+
+The advantage of this pattern is that we can use it in all of our templates. Anywhere we
+want to generically reference a private IP address, we have this variable available. You
+can imagine other synthetic facts that might be useful - a list variable `private_network_addresses`
+for hosts connected to multiple private networks, or a `public_network_address` variable.
+
+Here are some other ideas for synthetic facts you might derive from `setup`:
+ - `{{ network_interfaces_on_small_subnets }}`
+ - `{{ network_interfaces_without_ipv6_addresses }}`
+ - `{{ disks_over_500GB }}`
+ - `{{ disks_without_partitions }}`
+ - `{{ undefined_environment_variables }}`
+
+The one drawback to this pattern is that it makes our site.yml a little clumsy. We have to 
+add this role to every host/role mapping:
 ```
 # site.yml
 - hosts: graph-database-servers
@@ -95,11 +118,13 @@ runtime - it's all local, so it's very fast - but it makes our site file a littl
     - graph-database
 ```
 
-TODO: Conclusion, discuss other options like pre_tasks and facts.d
-TODO: clearly call out merits of this option
-
-
+In closing - using synthetic facts like this can keep your ansible playbooks very clean,
+especially if you're supporting servers in multiple datacenters. 
 
 > <sup>1</sup> I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was available.
 That solves this specific issue, but the solution I came up with - synthetic facts - has 
 further merit. 
+
+> <sup>2</sup> I considered using `pre_tasks`, but that gets even more repetitive. The role offers one place
+to store all of the logic. I also considered populating `/etc/ansible/facts.d/*.fact` on the target server, 
+but that just feels like I'm managing an agent for an agentless tool - the role keeps it agentless. 
