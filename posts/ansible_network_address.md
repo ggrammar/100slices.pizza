@@ -1,5 +1,9 @@
 ## 
 
+> :warning: The code examples in this article use fancy curly brackets `⦃` and `⦄`, instead 
+of curly brackets that would actually compile, `{` and `}`. If I use the normal curly brackets,
+GitHub Pages tries to render them and all my wonderful code examples disappear! 
+
 Let's say you're running a database. You don't want to expose your blockchains to the world, 
 so the database should bind to the private network address of the host it's running on:
 
@@ -23,8 +27,7 @@ always be bound to a private interface.
 
 I don't have that luxury - heterogeneous datacenter. 
 
-```python
-{# GitHub Pages is trying very hard to render this code block! #}
+```
 ⦃% for iface in hostvars[inventory_hostname]['ansible_interfaces'] %⦄
   {% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4'] is defined %}
     {% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private') %}
@@ -32,7 +35,7 @@ I don't have that luxury - heterogeneous datacenter.
     {% endif %}
   {% endif %}
 ⦃% endfor %⦄
-server.endpoint = tcp://{{ private_network_address }}:8529
+server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 ```
 
 What a mess! Plus, I have to do all this iteration work every time I want to access this
