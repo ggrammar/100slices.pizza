@@ -53,12 +53,8 @@ server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 ```
 
 What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
-the private IP address for the server. Plus, I have to do this separately in every template - 
+the private IP address for the server<sup>1</sup>. Plus, I have to do this separately in every template - 
 that's going to make the templates way bigger than they need to be. 
-
-> I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was available.
-That solves this specific issue, but the solution I came up with - synthetic facts - has 
-further merit. 
 
 Ideally, I would have liked to extend the ansible `setup` module, so that it would create 
 these facts for me, but I didn't see a low-maintenance way to do that. Instead, I found a
@@ -100,3 +96,10 @@ runtime - it's all local, so it's very fast - but it makes our site file a littl
 ```
 
 TODO: Conclusion, discuss other options like pre_tasks and facts.d
+TODO: clearly call out merits of this option
+
+
+
+> <sup>1</sup> I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was available.
+That solves this specific issue, but the solution I came up with - synthetic facts - has 
+further merit. 
