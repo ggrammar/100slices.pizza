@@ -73,9 +73,9 @@ from the host. Here's how the role looks:
 ```
 # roles/synthetic-facts/tasks/main.yml
 
-- name: Create the "private_address" fact. 
+- name: Create the "private_network_address" fact. 
   set_fact:
-    private_address: "⦃⦃ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] ⦄⦄"
+    private_network_address: "⦃⦃ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] ⦄⦄"
   when: 
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] is defined
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private')
