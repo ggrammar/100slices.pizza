@@ -1,4 +1,4 @@
-## Gathering Network Interface Facts with Ansible
+## Synthetic Facts with Ansible
 
 > Heads up! The code examples in this article use fancy curly brackets `⦃` and `⦄`, instead 
 of curly brackets that would actually compile, `{` and `}`. If I use the normal curly brackets,
@@ -6,17 +6,18 @@ GitHub Pages tries to render them, and all of my wonderful code examples disappe
 
 Let's say you're running a database. It's 2021, and graph databases are popular, so let's say
 it's ArangoDB. The database is storing all of your most sensitive... graphs... so you want it
-to bind to a private IP address. 
+to bind to a private IP address:
 
 ```
 # arangod.conf
 server.endpoint = tcp://10.0.0.1:8529
 ```
 
-This works for one server. For the sake of the article, let's say you're running many servers,
-and managing them with Ansible. The configuration file should be a template that can apply to many
-different servers. Ansible gathers facts about the host it's running on at runtime, so we can do
-something like this:
+This works for one server - check that config into source control and move on with your day. 
+
+For the sake of the article, let's say you're running many servers, and managing them with Ansible. 
+The configuration file should be a template that can apply to many different servers. Ansible gathers
+facts about the host it's running on at runtime, so we can do something like this:
 
 ```
 # arangod.conf.template
@@ -27,7 +28,7 @@ server.endpoint = tcp://⦃⦃ hostvars[inventory_hostname]['ansible_eth0']['ipv
 
 This is fine if you know that every server you'll ever touch has an eth0 interface, and that eth0
 interface will always have a private IP address. Things aren't usually that simple - what I'd really
-like is to use a variable like `private_network_address` and use that instead. 
+like is to have a variable like `private_network_address` and use that instead. 
 
 Ansible gathers all of the information we need to synthesize this variable, it's just a matter of 
 putting it together:
@@ -53,21 +54,39 @@ server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 
 What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
 the private IP address for the server. Plus, I have to do this separately in every template - 
-that's going to make them way bigger than they need to be. 
+that's going to make the templates way bigger than they need to be. 
 
-TODO: I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was a thing. 
-Synthesized facts is still a useful pattern. 
+> I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was available.
+That solves this specific issue, but the solution I came up with - synthetic facts - has 
+merit beyond this specific problem. 
 
-## Options
-Ideally, I'd like to add functionality to the ansible `setup` module, which is responsible
-for gathering facts in the first place. Doesn't seem to be an option.
+I found a couple of options for moving this complexity out of the templates, to somewhere
+more centralized. Ideally, I would have liked to extend the ansible `setup` module, so that
+it would create these facts for me, but I didn't see a way to do that intuitively. 
 
-I could store stuff in `/etc/ansible/facts.d/*.fact`. I don't want to have to manage that.
-We're already gathering the information, it just needs to be massaged.
+## Synthetic Facts
 
-Create a role, `synthetic-facts`, that does this work for us. We'll need to add it to 
-every role, so:
+Instead, we can create these additional facts at runtime. If we only use `set_fact`, this runs very
+quickly (single-digit seconds), since it's just operating on information we've already gathered 
+from the host. I put all of the logic into a role called `synthetic-facts`:
 ```
+# roles/synthetic-facts/tasks/main.yml
+- name: Create a list to hold our private IP addresses. 
+  set_fact:
+    private_addresses: []
+
+- name: Populate the list with private IP addresses. 
+  set_fact:
+    private_addresses: {{ private_addresses + [ ] }}
+  when: 
+    - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private')
+  with_items: hostvars[inventory_hostname]['ansible_interfaces']
+```
+
+We do have to assign this role to every group of hosts. This doesn't really hurt our 
+runtime - it's all local, so it's very fast - but it makes our site file a little clumsy:
+```
+# site.yml
 - hosts: graph-database-servers
   roles:
     - synthetic-facts
@@ -79,4 +98,4 @@ every role, so:
     - graph-database
 ```
 
-I don't really like this either - it's messy to specify the same thing over and over again.
+
