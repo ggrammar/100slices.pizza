@@ -115,7 +115,7 @@ add this role to every host/role mapping:
 - hosts: loadbalancers
   roles:
     - synthetic-facts
-    - graph-database
+    - loadbalancer
 ```
 
 In closing - using synthetic facts like this can keep your ansible playbooks very clean,
