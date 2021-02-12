@@ -62,7 +62,7 @@ that's going to make the templates way bigger and more complicated than they nee
 Ideally, I would have liked to extend the ansible `setup` module, so that it would create 
 these facts for me, but I didn't see a low-maintenance way to do that. Instead, I found a
 way to create new facts, at runtime, based on the information that `setup` already gathers. 
-I'm calling these "synthetic sacts". 
+I'm calling these "synthetic facts". 
 
 ## Synthetic Facts
 
