@@ -91,9 +91,9 @@ server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 Much cleaner! By separating the logic of finding what our private IP address is from the
 actual configuration, we have a cleaner config and a very useful variable. 
 
-The advantage of this pattern is that we can use it in all of our templates. Anywhere we
-want to generically reference a private IP address, we have this variable available. You
-can imagine other synthetic facts that might be useful - a list variable `private_network_addresses`
+The advantage of this pattern is that we can use the synthetic fact in all of our templates. 
+Anywhere we want to generically reference a private IP address, we have this variable available. 
+You can imagine other synthetic facts that might be useful - a list variable `private_network_addresses`
 for hosts connected to multiple private networks, or a `public_network_address` variable.
 
 Here are some other ideas for synthetic facts you might derive from `setup`:
