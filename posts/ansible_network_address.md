@@ -1,45 +1,62 @@
-## 
+## Gathering Network Interface Facts with Ansible
 
-> :warning: The code examples in this article use fancy curly brackets `⦃` and `⦄`, instead 
+> Heads up! The code examples in this article use fancy curly brackets `⦃` and `⦄`, instead 
 of curly brackets that would actually compile, `{` and `}`. If I use the normal curly brackets,
-GitHub Pages tries to render them and all my wonderful code examples disappear! 
+GitHub Pages tries to render them, and all of my wonderful code examples disappear! 
 
-Let's say you're running a database. You don't want to expose your blockchains to the world, 
-so the database should bind to the private network address of the host it's running on:
+Let's say you're running a database. It's 2021, and graph databases are popular, so let's say
+it's ArangoDB. The database is storing all of your most sensitive... graphs... so you want it
+to bind to a private IP address. 
 
 ```
+# arangod.conf
 server.endpoint = tcp://10.0.0.1:8529
 ```
 
-If you're just running the one server, you can check that into your playbook and call it a
-day. For the sake of the article, let's say you're running many servers, and managing them
-with Ansible. You might determine the server's address based on facts gathered at runtime:
+This works for one server. For the sake of the article, let's say you're running many servers,
+and managing them with Ansible. The configuration file should be a template that can apply to many
+different servers. Ansible gathers facts about the host it's running on at runtime, so we can do
+something like this:
 
 ```
-server.endpoint = tcp://{{ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] }}:8529
+# arangod.conf.template
+server.endpoint = tcp://⦃⦃ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] ⦄⦄:8529
 ```
 
-I already don't like this - there's information about the name of an interface (`eth0`) in my
-configuration file, when all I really want is the IPv4 address. It's bearable. 
+...and Ansible will replace that bracketed block with the IP address of the server it's running on.
 
-This is fine if all of your hosts have an eth0 interface, and if you know that eth0 will 
-always be bound to a private interface. 
+This is fine if you know that every server you'll ever touch has an eth0 interface, and that eth0
+interface will always have a private IP address. Things aren't usually that simple - what I'd really
+like is to use a variable like `private_network_address` and use that instead. 
 
-I don't have that luxury - heterogeneous datacenter. 
+Ansible gathers all of the information we need to synthesize this variable, it's just a matter of 
+putting it together:
 
 ```
+# arangod.conf.template
+⦃# ansible_interfaces is a list of the names of all the network interfaces for this server #⦄
 ⦃% for iface in hostvars[inventory_hostname]['ansible_interfaces'] %⦄
+
+  ⦃# make sure this interface actually has an ipv4 address #⦄
   ⦃% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4'] is defined %⦄
+  
+    ⦃# if the interface has a private address, that's a bingo! #⦄
     ⦃% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private') %⦄
-      ⦃pr set private_network_address = hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] %⦄
+      ⦃% set private_network_address = hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] %⦄
     ⦃% endif %⦄
+    
   ⦃% endif %⦄
+
 ⦃% endfor %⦄
 server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 ```
 
-What a mess! Plus, I have to do all this iteration work every time I want to access this
-private address. 
+What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
+the private IP address for the server. Plus, I have to do this separately in every template - 
+that's going to make them way bigger than they need to be. 
+
+TODO: I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was a thing. 
+Synthesized facts is still a useful pattern. 
 
 ## Options
 Ideally, I'd like to add functionality to the ansible `setup` module, which is responsible
