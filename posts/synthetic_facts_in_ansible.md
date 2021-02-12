@@ -27,9 +27,9 @@ server.endpoint = tcp://⦃⦃ hostvars[inventory_hostname]['ansible_eth0']['ipv
 ...and Ansible will replace that bracketed block with the IP address of the server it's running on.
 
 This is fine if you know that every server you'll ever touch has an eth0 interface, and that eth0
-interface will always have a private IP address. Things aren't usually that simple - maybe my server
-has a bonded pair of NICs on bond0 with the private IP address, or maybe eth0 is the public interface
-for just one server. 
+interface will always have a private IP address. Things aren't usually that simple - maybe one of my 
+servers has a bonded pair of NICs on bond0 with the private IP address, or maybe eth0 is the public
+interface for just one server. 
 
 What I'd really like is to have a variable like `private_network_address` and use that instead. 
 
