@@ -58,7 +58,7 @@ that's going to make the templates way bigger than they need to be.
 
 > I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was available.
 That solves this specific issue, but the solution I came up with - synthetic facts - has 
-merit beyond this specific problem. 
+further merit. 
 
 Ideally, I would have liked to extend the ansible `setup` module, so that it would create 
 these facts for me, but I didn't see a low-maintenance way to do that. Instead, I found a
@@ -98,4 +98,4 @@ runtime - it's all local, so it's very fast - but it makes our site file a littl
     - graph-database
 ```
 
-TODO: Conclusion
+TODO: Conclusion, discuss other options like pre_tasks and facts.d
