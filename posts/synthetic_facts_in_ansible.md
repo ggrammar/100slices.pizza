@@ -56,7 +56,7 @@ server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
 ```
 
 What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
-the private IP address for the server<sup>1</sup>. Plus, I have to do this separately in every template - 
+the private IP address for the server<sup>[1](#footnote1)</sup>. Plus, I have to do this separately in every template - 
 that's going to make the templates way bigger and more complicated than they need to be. 
 
 Ideally, I would have liked to extend the ansible `setup` module, so that it would create 
@@ -67,7 +67,7 @@ I'm calling these "synthetic sacts".
 ## Synthetic Facts
 
 Here's how I create these synthetic facts. I put all of the logic to create these facts in a new 
-role, `synthetic-facts`<sup>2</sup>. Because the only module that this role calls is `set_fact`, it runs very quickly - 
+role, `synthetic-facts`<sup>[2](#footnote2)</sup>. Because the only module that this role calls is `set_fact`, it runs very quickly - 
 all of the logic is executed on the controller, using information that `setup` has already gathered
 from the host. Here's how the role looks:
 ```
@@ -121,10 +121,11 @@ add this role to every host/role mapping:
 In closing - using synthetic facts like this can keep your ansible playbooks very clean,
 especially if you're supporting servers in multiple datacenters. 
 
-> <sup>1</sup> I didn't realize at the time of writing that `ansible_all_ipv4_addresses` was available.
-That solves this specific issue, but the solution I came up with - synthetic facts - has 
-further merit. 
+> <a name="footnote1">1</a> I didn't realize at the time of writing that `ansible_all_ipv4_addresses` 
+was available. That solves this specific networking issue, but I think synthetic facts bring much
+more to the table. 
 
-> <sup>2</sup> I considered using `pre_tasks`, but that gets even more repetitive. The role offers one place
-to store all of the logic. I also considered populating `/etc/ansible/facts.d/*.fact` on the target server, 
-but that just feels like I'm managing an agent for an agentless tool - the role keeps it agentless. 
+> <a name="footnote2">2</a> I considered using `pre_tasks`, but that gets even more repetitive. The role 
+offers one place to store all of the logic. I also considered populating `/etc/ansible/facts.d/*.fact` 
+on the target server with the required information, but that just feels like I'm managing an agent for an
+agentless tool - the role keeps it agentless. 
