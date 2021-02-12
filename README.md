@@ -7,7 +7,7 @@ I use this website to post my thoughts on systems administration, electrical eng
 The reason I'm doing this on the public Internet (rather than in a private notebook), is that I'd like to solicit feedback from whoever cares enough to read. 
 
 Here are some posts that you might like to read:
- - [Ansible Network Interface Facts](./posts/ansible_network_address.html "Ansible Network Interface Facts") (12 February 2021)
+ - [Synthetic Facts in Ansible](./posts/ansible_synthetic_facts.html "Synthetic Facts in Ansible") (12 February 2021)
  - [Mello Yello](./posts/mello_yello.html "Noise Machine") (6 April 2020 - Present)
  - [Fixed My Voltmeter](./posts/fixed_my_voltmeter.html "Well, I fixed the leads") (3 June 2020)
  - [I Love Lamp](./posts/i_love_lamp.html "I Love Lamp") (10 May 2020)
