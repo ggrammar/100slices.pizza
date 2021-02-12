@@ -23,11 +23,11 @@ always be bound to a private interface.
 
 I don't have that luxury - heterogeneous datacenter. 
 
-```
+```python
 {% for iface in hostvars[inventory_hostname]['ansible_interfaces'] %}
   {% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4'] is defined %}
     {% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private') %}
-      set private_network_address = hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address']
+      {% set private_network_address = hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] %}
     {% endif %}
   {% endif %}
 {% endfor %}
