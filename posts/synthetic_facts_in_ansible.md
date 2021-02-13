@@ -1,9 +1,5 @@
 ## Synthetic Facts in Ansible
 
-> Heads up! The code examples in this article use fancy curly brackets `⦃` and `⦄`, instead 
-of curly brackets that would actually compile, `{` and `}`. If I use the normal curly brackets,
-GitHub Pages tries to render them, and all of my wonderful code examples disappear! 
-
 Let's say you're running a database. It's 2021, and graph databases are popular, so let's say
 it's ArangoDB. The database is storing all of your most sensitive... graphs... so you want it
 to bind to a private IP address:
@@ -20,8 +16,10 @@ The configuration file should be a template that can apply to many different ser
 facts about the host it's running on at runtime, so we can do something like this:
 
 ```
+{% raw %}
 # arangod.conf.template
-server.endpoint = tcp://⦃⦃ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] ⦄⦄:8529
+server.endpoint = tcp://{{ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] }}:8529
+{% endraw %}
 ```
 
 ...and Ansible will replace that bracketed block with the IP address of the server it's running on.
@@ -37,22 +35,24 @@ Ansible gathers all of the information we need to synthesize this variable, it's
 putting it together. Here's what it looks like in the template:
 
 ```
+{% raw %}
 # arangod.conf.template
-⦃# ansible_interfaces is a list of the names of all the network interfaces for this server #⦄
-⦃% for iface in hostvars[inventory_hostname]['ansible_interfaces'] %⦄
+{# ansible_interfaces is a list of the names of all the network interfaces for this server #}
+{% for iface in hostvars[inventory_hostname]['ansible_interfaces'] %}
 
-  ⦃# make sure this interface actually has an ipv4 address #⦄
-  ⦃% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4'] is defined %⦄
+  {# make sure this interface actually has an ipv4 address #}
+  {% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4'] is defined %}
   
-    ⦃# if the interface has a private address, that's a bingo! #⦄
-    ⦃% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private') %⦄
-      ⦃% set private_network_address = hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] %⦄
-    ⦃% endif %⦄
+    {# if the interface has a private address, that's a bingo! #}
+    {% if hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private') %}
+      {% set private_network_address = hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] %}
+    {% endif %}
     
-  ⦃% endif %⦄
+  {% endif %}
 
-⦃% endfor %⦄
-server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
+{% endfor %}
+server.endpoint = tcp://{{ private_network_address }}:8529
+{% endraw %}
 ```
 
 What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
@@ -71,21 +71,25 @@ role, `synthetic-facts`<sup>[2](#footnote2)</sup>. Because the only module that 
 all of the logic is executed on the controller, using information that `setup` has already gathered
 from the host. Here's how the role looks:
 ```
+{% raw %}
 # roles/synthetic-facts/tasks/main.yml
 
 - name: Create the "private_network_address" fact. 
   set_fact:
-    private_network_address: "⦃⦃ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] ⦄⦄"
+    private_network_address: "{{ hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] }}"
   when: 
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] is defined
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private')
   with_items: hostvars[inventory_hostname]['ansible_interfaces']
+{% endraw %}
 ```
 
 And, here's how we might use it in our configuration:
 ```
+{% raw %}
 # arangod.conf.template
-server.endpoint = tcp://⦃⦃ private_network_address ⦄⦄:8529
+server.endpoint = tcp://{{ private_network_address }}:8529
+{% endraw %}
 ```
 
 Much cleaner! By separating the logic of finding what our private IP address is from the
@@ -97,11 +101,11 @@ You can imagine other synthetic facts that might be useful - a list variable `pr
 for hosts connected to multiple private networks, or a `public_network_address` variable.
 
 Here are some other ideas for synthetic facts you might derive from `setup`:
- - `⦃⦃ network_interfaces_on_small_subnets ⦄⦄`
- - `⦃⦃ network_interfaces_without_ipv6_addresses ⦄⦄`
- - `⦃⦃ disks_over_500GB ⦄⦄`
- - `⦃⦃ disks_without_partitions ⦄⦄`
- - `⦃⦃ undefined_environment_variables ⦄⦄`
+ - `network_interfaces_on_small_subnets`
+ - `network_interfaces_without_ipv6_addresses`
+ - `disks_over_500GB`
+ - `disks_without_partitions`
+ - `undefined_environment_variables`
 
 The one drawback to this pattern is that it makes our site.yml a little clumsy. We have to 
 add this role to every host/role mapping:
