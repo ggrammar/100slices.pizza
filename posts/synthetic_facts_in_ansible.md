@@ -16,10 +16,8 @@ The configuration file should be a template that can apply to many different ser
 facts about the host it's running on at runtime, so we can do something like this:
 
 ```
-{% raw %}
-# arangod.conf.template
-server.endpoint = tcp://{{ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] }}:8529
-{% endraw %}
+{% raw %}# arangod.conf.template
+server.endpoint = tcp://{{ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] }}:8529{% endraw %}
 ```
 
 ...and Ansible will replace that bracketed block with the IP address of the server it's running on.
@@ -35,8 +33,7 @@ Ansible gathers all of the information we need to synthesize this variable, it's
 putting it together. Here's what it looks like in the template:
 
 ```
-{% raw %}
-# arangod.conf.template
+{% raw %}# arangod.conf.template
 {# ansible_interfaces is a list of the names of all the network interfaces for this server #}
 {% for iface in hostvars[inventory_hostname]['ansible_interfaces'] %}
 
@@ -51,8 +48,7 @@ putting it together. Here's what it looks like in the template:
   {% endif %}
 
 {% endfor %}
-server.endpoint = tcp://{{ private_network_address }}:8529
-{% endraw %}
+server.endpoint = tcp://{{ private_network_address }}:8529{% endraw %}
 ```
 
 What a mess! There's all of this _infrastructure_ in my config file, when all I wanted was
@@ -71,8 +67,7 @@ role, `synthetic-facts`<sup>[2](#footnote2)</sup>. Because the only module that 
 all of the logic is executed on the controller, using information that `setup` has already gathered
 from the host. Here's how the role looks:
 ```
-{% raw %}
-# roles/synthetic-facts/tasks/main.yml
+{% raw %}# roles/synthetic-facts/tasks/main.yml
 
 - name: Create the "private_network_address" fact. 
   set_fact:
@@ -80,16 +75,13 @@ from the host. Here's how the role looks:
   when: 
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] is defined
     - hostvars[inventory_hostname]['ansible_' + iface]['ipv4']['address'] | ansible.netcommon.ipaddr('private')
-  with_items: hostvars[inventory_hostname]['ansible_interfaces']
-{% endraw %}
+  with_items: hostvars[inventory_hostname]['ansible_interfaces']{% endraw %}
 ```
 
 And, here's how we might use it in our configuration:
 ```
-{% raw %}
-# arangod.conf.template
-server.endpoint = tcp://{{ private_network_address }}:8529
-{% endraw %}
+{% raw %}# arangod.conf.template
+server.endpoint = tcp://{{ private_network_address }}:8529{% endraw %}
 ```
 
 Much cleaner! By separating the logic of finding what our private IP address is from the
@@ -133,3 +125,5 @@ more to the table.
 offers one place to store all of the logic. I also considered populating `/etc/ansible/facts.d/*.fact` 
 on the target server with the required information, but that just feels like I'm managing an agent for an
 agentless tool - the role keeps it agentless. 
+
+> Thanks to u/retr0h for helping me out with a template formatting issue!
