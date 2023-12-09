@@ -5,7 +5,9 @@
 ## God Rest You Merry Gentlemen
 
 God rest you merry, gentlemen,    Let nothing you dismay
+
 For Jesus Christ our Savior       Was born upon this day
+
 To save us all from Satan's pow'r When we were gone a-stray
 
 O tidings of comfort and joy, comfort and joy, O tidings of comfort and joy
@@ -62,5 +64,25 @@ Shall yourselves find blessing.
 ## Jolly Old St. Nicholas
 
 ## O Christmas Tree
+
+O Christmas tree, O Christmas tree!
+Thou tree most fair and lovely!
+O Christmas tree, O Christmas tree,
+Thou tree most fair and lovely!
+
+The sight of thee at Christmastide
+Spreads hope and gladness far and wide
+O Christmas tree, O Christmas tree!
+Thou tree most fair and lovely!
+
+O Christmas tree, O Christmas tree!
+Thou hast a wondrous message.
+O Christmas tree, O Christmas tree,
+Thou hast a wondrous message.
+
+Thou dost proclaim the Savior's birth,
+Goodwill to men and peace on earth.
+O Christmas tree, O Christmas tree,
+Thou hast a wondrous message.
 
 ## Silent Night
