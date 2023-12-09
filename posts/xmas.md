@@ -12,51 +12,96 @@ To save us all from Satan's pow'r When we were gone a-stray
 
 O tidings of comfort and joy, comfort and joy, O tidings of comfort and joy
 
+---
+
 ## Good King Wenceslas
 
 Good King Wenceslas looked out
+
 On the Feast of Stephen
+
 When the snow lay round about
+
 Deep and crisp and even
+
 Brightly shone the moon that night
+
 Though the frost was cruel
+
 When a poor man came in sight
+
 Gathering winter fuel
 
+---
+
 "Hither, page, and stand by me,
+
 If thou knowst it, telling
+
 Yonder peasant, who is he?
+
 Where and what his dwelling?"
+
 "Sire, he lives a good league hence,
+
 Underneath the mountain
+
 Right against the forest fence
+
 By Saint Agnes fountain."
 
+---
+
 "Bring me flesh and bring me wine
+
 Bring me pine logs hither
+
 Thou and I shall see him dine
+
 When we bear them thither."
+
 Page and monarch, forth they went
+
 Forth they went together
+
 Through the rude winds wild lament
+
 And the bitter weather
 
+---
+
 "Sire, the night is darker now
+
 And the wind blows stronger
+
 Fails my heart, I know not how
+
 I can go no longer."
+
 "Mark my footsteps, good my page!
+
 Tread thou in them boldly:
+
 Thou shall find the winters rage
+
 Freeze thy blood less coldly."
 
+---
+
 In his masters step he trod
+
 Where the snow lay dinted
+
 Heat was in the very sod
+
 Which the Saint had printed
+
 Therefore, Christian men, be sure
+
 Wealth or rank possessing
+
 Ye, who now will bless the poor
+
 Shall yourselves find blessing.
 
 ## (There's No Place Like) Home for the Holidays
@@ -101,8 +146,6 @@ O Christmas tree, O Christmas tree,
 
 Thou tree most fair and lovely!
 
----
-
 The sight of thee at Christmastide
 
 Spreads hope and gladness far and wide
@@ -120,8 +163,6 @@ Thou hast a wondrous message.
 O Christmas tree, O Christmas tree,
 
 Thou hast a wondrous message.
-
----
 
 Thou dost proclaim the Savior's birth,
 
