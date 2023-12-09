@@ -2,17 +2,173 @@
 
 ## Carol of the Bells
 
-## God Rest You Merry Gentlemen
+Hark! how the bells
 
-God rest you merry, gentlemen,    Let nothing you dismay
+Sweet silver bells
 
-For Jesus Christ our Savior       Was born upon this day
+All seem to say
 
-To save us all from Satan's pow'r When we were gone a-stray
+"Throw cares away"
 
-O tidings of comfort and joy, comfort and joy, O tidings of comfort and joy
+Christmas is here
+
+Bringing good cheer
+
+To young and old
+
+Meek and the bold
+
+Ding, dong ding dong
+
+That is their song
+
+With joyful ring
+
+All caroling
+
+One seems to hear
+
+Words of good cheer
+
+From ev'rywhere
+
+Filling the air
+
+Oh how they pound
+
+Raising the sound
+
+O'er hill and dale
+
+Telling their tale
+
+Gaily they ring
+
+While people sing
+
+Songs of good cheer
+
+Christmas is here
+
+Merry, merry, merry, merry Christmas
+
+Merry, merry, merry, merry Christmas
 
 ---
+
+On on they send
+
+On without end
+
+Their joyful tone 
+
+to every home
+
+Hark! how the bell
+
+Sweet silver bells
+
+All seem to say
+
+"Throw cares away"
+
+Christmas is here
+
+Bringing good cheer
+
+To young and old
+
+Meek and the bold
+
+Ding, dong ding dong
+
+That is their song
+
+With joyful ring
+
+All caroling
+
+One seems to hear
+
+Words of good cheer
+
+From ev'rywhere
+
+Filling the air
+
+Oh how they pound
+
+Raising the sound
+
+O'er hill and dale
+
+Telling their tale
+
+Gaily they ring
+
+While people sing
+
+Songs of good cheer
+
+Christmas is here
+
+Merry, merry, merry, merry Christmas
+
+Merry, merry, merry, merry Christmas
+
+## God Rest You Merry Gentlemen
+
+God rest you merry, gentlemen,    
+
+Let nothing you dismay,
+
+For Jesus Christ our Savior       
+
+Was born upon this day
+
+To save us all from Satan's pow'r 
+
+When we were gone a-stray:
+
+O tidings of comfort and joy, comfort and joy, 
+
+O tidings of comfort and joy
+
+---
+
+From God our heav'nly Father
+
+A blessed angel came,
+
+And unto certain shepherds
+
+Brought tidings of the same,
+
+How that in Bethlehem was born
+
+The son of God by name:
+
+O tidings of comfort and joy, comfort and joy, 
+
+O tidings of comfort and joy
+
+---
+
+The shepherds at those tidings
+
+Rejoiced much in mind,
+
+And left their flocks a-feeding,
+
+In tempest storm and wind,
+
+And went to Bethlehem straight-way
+
+This bless-ed babe to find:
+
+O tidings of comfort and joy, comfort and joy, 
+
+O tidings of comfort and joy
 
 ## Good King Wenceslas
 
@@ -136,6 +292,58 @@ For the holidays, you can't beat home sweet home
 
 ## Jolly Old St. Nicholas
 
+Jolly old St.Nicholas
+
+Lean your ear this way
+
+Don't you tell a single soul
+
+What I'm going to say
+
+Christmas Eve is coming soon
+
+Now, you dear old man
+
+Whisper what you'll bring to me
+
+Tell me if you can
+
+---
+
+When the clock is striking twelve
+
+When I'm fast asleep
+
+Down the chimney broad and black
+
+With your pack you'll creep
+
+All the stockings you will find
+
+Hanging in a row
+
+Mine will be the shortest one
+
+You'll be sure to know
+
+---
+
+Johnny wants a pair of skates
+
+Suzie wants a dolly
+
+Nellie wants a story book
+
+She thinks dolls are folly
+
+As for me, my little brain
+
+Isn't very bright
+
+Choose for me, old Santa Claus
+
+What you think is right
+
 ## O Christmas Tree
 
 O Christmas tree, O Christmas tree!
@@ -173,3 +381,44 @@ O Christmas tree, O Christmas tree,
 Thou hast a wondrous message.
 
 ## Silent Night
+
+Silent night, holy night
+
+All is calm, all is bright
+
+Round yon Virgin, Mother and Child
+
+Holy Infant so tender and mild
+
+Sleep in heavenly peace
+
+Sleep in heavenly peace
+
+---
+
+Silent night, holy night
+
+Shepherds quake at the sight
+
+Glories stream from heaven afar
+
+Heavenly hosts sing Alleluia
+
+Christ the Savior is born
+
+Christ the Savior is born
+
+---
+
+Silent night, holy night
+
+Son of God, love's pure light
+
+Radiant beams from Thy holy face
+
+With the dawn of redeeming grace
+
+Jesus Lord, at Thy birth
+
+Jesus Lord, at Thy birth
+
