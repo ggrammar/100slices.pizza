@@ -56,15 +56,7 @@ Merry, merry, merry, merry Christmas
 
 ---
 
-On on they send
-
-On without end
-
-Their joyful tone 
-
-to every home
-
-Hark! how the bell
+Hark! how the bells
 
 Sweet silver bells
 
@@ -115,6 +107,16 @@ Christmas is here
 Merry, merry, merry, merry Christmas
 
 Merry, merry, merry, merry Christmas
+
+---
+
+On on they send
+
+On without end
+
+Their joyful tone
+
+to every home
 
 ## God Rest You Merry Gentlemen
 
