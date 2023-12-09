@@ -61,28 +61,74 @@ Shall yourselves find blessing.
 
 ## (There's No Place Like) Home for the Holidays
 
+Oh, there's no place like home for the holidays
+
+'Cause no matter how far away you roam
+
+When you pine for the sunshine of a friendly gaze
+
+For the holidays, you can't beat home sweet home
+
+I met a man who lives in Tennessee, and he was heading for
+
+Pennsylvania and some homemade pumpkin pie
+
+From Pennsylvania folks are travellin'
+
+Down to Dixie's sunny shore
+
+From Atlantic to Pacific
+
+Gee, the traffic is terrific
+
+Oh, there's no place like home for the holidays
+
+'Cause no matter how far away you roam
+
+If you want to be happy in a million ways
+
+For the holidays, you can't beat home sweet home
+
 ## Jolly Old St. Nicholas
 
 ## O Christmas Tree
 
 O Christmas tree, O Christmas tree!
+
 Thou tree most fair and lovely!
+
 O Christmas tree, O Christmas tree,
+
 Thou tree most fair and lovely!
+
+---
 
 The sight of thee at Christmastide
+
 Spreads hope and gladness far and wide
+
 O Christmas tree, O Christmas tree!
+
 Thou tree most fair and lovely!
 
+---
+
 O Christmas tree, O Christmas tree!
-Thou hast a wondrous message.
-O Christmas tree, O Christmas tree,
+
 Thou hast a wondrous message.
 
-Thou dost proclaim the Savior's birth,
-Goodwill to men and peace on earth.
 O Christmas tree, O Christmas tree,
+
+Thou hast a wondrous message.
+
+---
+
+Thou dost proclaim the Savior's birth,
+
+Goodwill to men and peace on earth.
+
+O Christmas tree, O Christmas tree,
+
 Thou hast a wondrous message.
 
 ## Silent Night
