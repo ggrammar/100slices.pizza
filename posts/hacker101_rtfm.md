@@ -177,7 +177,7 @@ Task Completed
 %
 % # That's something! 
 % curl ${BASE_URL}/api/v1/config 
-{"server":"Neptune","version":"1.3.94","private_key":"^FLAG^3b58b7d188df973cfebd140cb0a442c3c0eb67192c22e185920e848731101883$FLAG$"}%    
+{"server":"Neptune","version":"1.3.94","private_key":"FLAG"}%    
 ```
 
 Halfway there! That secrets endpoint looks interesting, too - I think if we can 
