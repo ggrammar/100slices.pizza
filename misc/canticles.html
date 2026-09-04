@@ -105,18 +105,12 @@
       0 0 32px rgba(var(--glow), 0.35);
   }
 
-  .status {
-    margin-top: 10px;
-    font-size: 13px;
-    color: var(--dim);
-    min-height: 16px;
-  }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="field">
-      <input type="hidden" id="sentence-input" value="I WILL NOT FEAR THE WIZARD, FOR THEY ARE BLINDED BY AMBITION
+      <input type="hidden" id="canticles" value="I WILL NOT FEAR THE WIZARD, FOR THEY ARE BLINDED BY AMBITION
 
 I WILL NOT FEAR THE CLERIC, FOR THEY ARE BEHOLDEN TO A DECEIVER
 
@@ -141,23 +135,30 @@ I ALONE WILL PURGE THE CHAOS">
     </div>
 
     <div id="sentence" class="sentence"></div>
-    <div id="status" class="status"></div>
   </div>
 
 <script>
-  const sentenceInput = document.getElementById('sentence-input');
+  const canticles = document.getElementById('canticles');
   const userInput = document.getElementById('user-input');
   const sentenceDisplay = document.getElementById('sentence');
-  const status = document.getElementById('status');
 
   function renderHighlight(sentence, query) {
-    const q = query.toLowerCase().replace(/[^a-z]/g, '');
+    // Remove anything that's _not_ a letter or a semicolon. 
+    const q = query.toLowerCase().replace(/[^a-z;]/g, '');
     let qi = 0;
     let matched = 0;
     const frag = document.createDocumentFragment();
 
     for (const ch of sentence) {
-      if (qi < q.length && ch.toLowerCase() === q[qi]) {
+      const isAlpha = /[a-z]/i.test(ch);
+
+      if (isAlpha && qi < q.length && q[qi] === ';') {
+        qi++;
+        frag.appendChild(document.createTextNode(ch));
+        continue;
+      }
+
+      if (isAlpha && qi < q.length && ch.toLowerCase() === q[qi]) {
         const span = document.createElement('span');
         span.className = 'match';
         span.textContent = ch;
@@ -172,16 +173,12 @@ I ALONE WILL PURGE THE CHAOS">
   }
 
   function update() {
-    const sentence = sentenceInput.value;
-    const query = userInput.value;
-
     sentenceDisplay.innerHTML = '';
-    const { frag, matched } = renderHighlight(sentence, query);
+    const { frag, matched } = renderHighlight(canticles.value, userInput.value);
     sentenceDisplay.appendChild(frag);
-
   }
 
-  sentenceInput.addEventListener('input', update);
+  canticles.addEventListener('input', update);
   userInput.addEventListener('input', update);
   update();
 </script>
