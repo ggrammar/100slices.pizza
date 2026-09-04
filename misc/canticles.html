@@ -130,8 +130,8 @@ I ALONE WILL PURGE THE CHAOS">
     </div>
 
     <div class="field">
-      <label for="user-input">Find new meaning in The Canticles</label>
-      <input type="text" id="user-input" autocomplete="off">
+      <label for="wisdom">Find new meaning in The Canticles</label>
+      <input type="text" id="wisdom" autocomplete="off">
     </div>
 
     <div id="sentence" class="sentence"></div>
@@ -139,26 +139,26 @@ I ALONE WILL PURGE THE CHAOS">
 
 <script>
   const canticles = document.getElementById('canticles');
-  const userInput = document.getElementById('user-input');
+  const wisdom = document.getElementById('wisdom');
   const sentenceDisplay = document.getElementById('sentence');
 
-  function renderHighlight(sentence, query) {
-    // Remove anything that's _not_ a letter or a semicolon. 
+  function renderHighlight(icanticles, query) {
+    // Remove anything that's _not_ a letter or a semicolon. Don't want to get
+    // tripped up by spaces or anything else that lands in the input field.
     const q = query.toLowerCase().replace(/[^a-z;]/g, '');
     let qi = 0;
     let matched = 0;
     const frag = document.createDocumentFragment();
 
-    for (const ch of sentence) {
-      const isAlpha = /[a-z]/i.test(ch);
+    for (const ch of icanticles) {
 
-      if (isAlpha && qi < q.length && q[qi] === ';') {
+      if (qi < q.length && q[qi] === ';') {
         qi++;
         frag.appendChild(document.createTextNode(ch));
         continue;
       }
 
-      if (isAlpha && qi < q.length && ch.toLowerCase() === q[qi]) {
+      if (qi < q.length && ch.toLowerCase() === q[qi]) {
         const span = document.createElement('span');
         span.className = 'match';
         span.textContent = ch;
@@ -174,12 +174,12 @@ I ALONE WILL PURGE THE CHAOS">
 
   function update() {
     sentenceDisplay.innerHTML = '';
-    const { frag, matched } = renderHighlight(canticles.value, userInput.value);
+    const { frag, matched } = renderHighlight(canticles.value, wisdom.value);
     sentenceDisplay.appendChild(frag);
   }
 
   canticles.addEventListener('input', update);
-  userInput.addEventListener('input', update);
+  wisdom.addEventListener('input', update);
   update();
 </script>
 </body>
