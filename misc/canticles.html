@@ -61,7 +61,7 @@
     margin-bottom: 20px;
   }
 
-  input[type="text"] {
+  textarea {
     width: 100%;
     font-family: var(--mono);
     font-size: 16px;
@@ -96,7 +96,7 @@
     min-height: 1.6em;
   }
 
-  .sentence .match {
+  .match {
     color: var(--match);
     font-weight: 600;
     text-shadow:
@@ -131,16 +131,20 @@ I ALONE WILL PURGE THE CHAOS">
 
     <div class="field">
       <label for="wisdom">Find new meaning in The Canticles</label>
-      <input type="text" id="wisdom" autocomplete="off">
+      <!-- We want a textarea here, so the user can provide multiple lines,
+           which is great for readability -->
+      <textarea type="textarea" id="wisdom" autocomplete="off"></textarea>
     </div>
 
     <div id="sentence" class="sentence"></div>
+    <div id="completed" class="sentence match"></div>
   </div>
 
 <script>
-  const canticles = document.getElementById('canticles');
-  const wisdom = document.getElementById('wisdom');
+  const canticles       = document.getElementById('canticles');
+  const wisdom          = document.getElementById('wisdom');
   const sentenceDisplay = document.getElementById('sentence');
+  const completedDisplay = document.getElementById('completed');
 
   function renderHighlight(icanticles, query) {
     // Remove anything that's _not_ a letter or a semicolon. Don't want to get
@@ -173,13 +177,18 @@ I ALONE WILL PURGE THE CHAOS">
   }
 
   function update() {
+    console.log("Update...");
     sentenceDisplay.innerHTML = '';
     const { frag, matched } = renderHighlight(canticles.value, wisdom.value);
     sentenceDisplay.appendChild(frag);
+
+    // Display the user's input with some nice formatting. 
+    completedDisplay.textContent = wisdom.value.toUpperCase().replace(/[^A-Z \r\n]/g, '');
   }
 
   canticles.addEventListener('input', update);
   wisdom.addEventListener('input', update);
+  
   update();
 </script>
 </body>
