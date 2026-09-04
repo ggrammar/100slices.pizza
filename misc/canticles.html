@@ -132,7 +132,7 @@ I ALONE WILL PURGE THE CHAOS
 
     <div class="field">
       <label for="user-input">Your letters</label>
-      <input type="text" id="user-input" placeholder="type here, e.g. yam" autocomplete="off">
+      <input type="text" id="user-input" autocomplete="off">
     </div>
 
     <div id="sentence" class="sentence"></div>
@@ -145,8 +145,6 @@ I ALONE WILL PURGE THE CHAOS
   const sentenceDisplay = document.getElementById('sentence');
   const status = document.getElementById('status');
 
-  // Walk the sentence left to right, and for each character of the
-  // user's input (in order), consume the next matching letter found.
   function renderHighlight(sentence, query) {
     const q = query.toLowerCase();
     let qi = 0;
@@ -176,13 +174,6 @@ I ALONE WILL PURGE THE CHAOS
     const { frag, matched } = renderHighlight(sentence, query);
     sentenceDisplay.appendChild(frag);
 
-    if (!query) {
-      status.textContent = '';
-    } else if (matched === query.length) {
-      status.textContent = `all ${matched} letters matched, in order`;
-    } else {
-      status.textContent = `${matched} of ${query.length} letters matched so far`;
-    }
   }
 
   sentenceInput.addEventListener('input', update);
