@@ -151,7 +151,7 @@ I ALONE WILL PURGE THE CHAOS">
   const status = document.getElementById('status');
 
   function renderHighlight(sentence, query) {
-    const q = query.toLowerCase();
+    const q = query.toLowerCase().replace(/[^a-z]/g, '');
     let qi = 0;
     let matched = 0;
     const frag = document.createDocumentFragment();
